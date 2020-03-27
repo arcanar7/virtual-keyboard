@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.text {
+  width: 100%;
+  height: 30vh;
+  resize: vertical;
+}
+
+.keyboard {
+  width: 100%;
+  margin-top: 20px;
+
+  &__keys {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.keyboard__key {
+  width: 50px;
+  height: 50px;
+  margin: 3px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+
+  &:active {
+    background-color: rgba(139, 139, 139, 0.2);
+  }
+
+  &_wide {
+    width: 150px;
+  }
+
+  &_ultra-wide {
+    width: 350px;
+  }
+}
+
+@media (hover: hover) {
+  .keyboard__key:hover {
+    background-color: rgba(139, 139, 139, 0.2);
+  }
+}
