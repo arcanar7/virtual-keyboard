@@ -18,13 +18,13 @@
   margin-top: 20px;
 }
 
-.keyboard__keys {
+.line {
   display: flex;
-  justify-content: center;
 }
 
 .keyboard__key {
-  width: 50px;
+  width: 5%;
+  max-width: 50px;
   height: 50px;
   margin: 3px;
   cursor: pointer;
@@ -38,11 +38,18 @@
 }
 
 .keyboard__key_wide {
-  width: 150px;
+  width: 8%;
+  max-width: 75px;
+}
+
+.keyboard__key_middle-wide {
+  width: 15%;
+  max-width: 150px;
 }
 
 .keyboard__key_ultra-wide {
-  width: 350px;
+  width: 40%;
+  max-width: 405px;
 }
 
 @media (hover: hover) {

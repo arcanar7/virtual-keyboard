@@ -16,15 +16,15 @@
 .keyboard {
   width: 100%;
   margin-top: 20px;
+}
 
-  &__keys {
-    display: flex;
-    justify-content: center;
-  }
+.line {
+  display: flex;
 }
 
 .keyboard__key {
-  width: 50px;
+  width: 5%;
+  max-width: 50px;
   height: 50px;
   margin: 3px;
   cursor: pointer;
@@ -37,11 +37,18 @@
   }
 
   &_wide {
-    width: 150px;
+    width: 8%;
+    max-width: 75px;
+  }
+
+  &_middle-wide {
+    width: 15%;
+    max-width: 150px;
   }
 
   &_ultra-wide {
-    width: 350px;
+    width: 40%;
+    max-width: 405px;
   }
 }
 
