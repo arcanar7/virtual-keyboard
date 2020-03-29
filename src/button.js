@@ -1,10 +1,16 @@
 class Button {
-  constructor(text = { en: 'a', ru: 'а' }, wide = 'normal', altText = '') {
+  constructor(
+    text = { en: 'a', ru: 'а' },
+    wide = 'normal',
+    altText = { en: 'A', ru: 'А' },
+    code = 'KeyA',
+  ) {
     this.node = null
     this.wide = wide
     this.lang = 'en'
     this.text = text
     this.altText = altText
+    this.code = code
   }
 
   init() {
@@ -34,6 +40,14 @@ class Button {
   changeLanguage(lang) {
     this.lang = lang
     this.changeText()
+  }
+
+  shift() {
+    this.node.classList.remove('shift')
+  }
+
+  caps() {
+    this.node.classList.remove('shift')
   }
 }
 

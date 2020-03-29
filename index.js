@@ -1,81 +1,21 @@
 import Button from './src/button.js'
-
-const arrayButtons = [
-  { text: { en: '`', ru: 'ё' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '1', ru: '1' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '2', ru: '2' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '3', ru: '3' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '4', ru: '4' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '5', ru: '5' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '6', ru: '6' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '7', ru: '7' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '8', ru: '8' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '9', ru: '9' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '0', ru: '0' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '-', ru: '-' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '=', ru: '=' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'Backspace', ru: 'Backspace' }, wide: 'middle-wide', altText: '', br: true },
-  { text: { en: 'Tab', ru: 'Tab' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'q', ru: 'й' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'w', ru: 'ц' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'e', ru: 'у' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'r', ru: 'к' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 't', ru: 'е' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'y', ru: 'н' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'u', ru: 'г' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'i', ru: 'ш' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'o', ru: 'щ' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'p', ru: 'з' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '[', ru: 'х' }, wide: 'normal', altText: '', br: false },
-  { text: { en: ']', ru: 'ъ' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '\\', ru: '\\' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'DEL', ru: 'DEL' }, wide: 'normal', altText: '', br: true },
-  { text: { en: 'Caps Lock', ru: 'Caps Lock' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'a', ru: 'ф' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 's', ru: 'ы' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'd', ru: 'в' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'f', ru: 'а' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'g', ru: 'п' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'h', ru: 'р' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'j', ru: 'о' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'k', ru: 'л' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'l', ru: 'д' }, wide: 'normal', altText: '', br: false },
-  { text: { en: ';', ru: 'ж' }, wide: 'normal', altText: '', br: false },
-  { text: { en: `'`, ru: 'э' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'ENTER', ru: 'ENTER' }, wide: 'middle-wide', altText: '', br: true },
-  { text: { en: 'Shift', ru: 'Shift' }, wide: 'middle-wide', altText: '', br: false },
-  { text: { en: 'z', ru: 'я' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'x', ru: 'ч' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'c', ru: 'с' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'v', ru: 'м' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'b', ru: 'и' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'n', ru: 'т' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'm', ru: 'ь' }, wide: 'normal', altText: '', br: false },
-  { text: { en: ',', ru: 'б' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '.', ru: 'ю' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '/', ru: '.' }, wide: 'normal', altText: '', br: false },
-  { text: { en: 'Shift', ru: 'Shift' }, wide: 'middle-wide', altText: '', br: false },
-  { text: { en: '&#8593;', ru: '&#8593;' }, wide: 'normal', altText: '', br: true },
-  { text: { en: 'Ctrl', ru: 'Ctrl' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'Win', ru: 'Win' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'Alt', ru: 'Alt' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'Space', ru: 'Space' }, wide: 'ultra-wide', altText: '', br: false },
-  { text: { en: 'Alt', ru: 'Alt' }, wide: 'wide', altText: '', br: false },
-  { text: { en: 'Ctrl', ru: 'Ctrl' }, wide: 'wide', altText: '', br: false },
-  { text: { en: '&#8592;', ru: '&#8592;' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '&#8595;', ru: '&#8595;' }, wide: 'normal', altText: '', br: false },
-  { text: { en: '&#8594;', ru: '&#8594;' }, wide: 'normal', altText: '', br: true },
-]
+import ButtonWord from './src/buttonWord.js'
+import ButtonAlternative from './src/buttonAlternative.js'
+import arrayButtons from './src/arrayButtons.js'
+import { addAlwaysShift, isCaps, isShift, runOnKeys } from './src/utils.js'
 
 class Keyboard {
   constructor() {
     this.capsLock = false
+    this.shift = false
+    this.alwaysShift = false
     this.keys = []
+    this.lang = 'en'
+    this.textArea = document.createElement('textarea')
   }
 
   init() {
     const wrapper = document.createElement('div')
-    this.textArea = document.createElement('textarea')
     const keyboard = document.createElement('div')
     const keyboardKeys = document.createElement('div')
     wrapper.classList.add('wrapper')
@@ -88,6 +28,13 @@ class Keyboard {
     wrapper.append(this.textArea, keyboard)
 
     document.body.append(wrapper)
+    runOnKeys(
+      this.changeLang.bind(this),
+      ['ShiftLeft', 'ControlLeft'],
+      ['ShiftRight', 'ControlRight'],
+    )
+    document.addEventListener('keydown', this.highlightButton.bind(this))
+    document.addEventListener('keyup', this.removeHighlightButton.bind(this))
   }
 
   createKeys() {
@@ -95,48 +42,269 @@ class Keyboard {
     let line = document.createElement('div')
     line.classList.add('line')
     for (const button of arrayButtons) {
-      const { text, wide, altText, br } = button
-      const newButton = new Button(text, wide, altText)
+      const { text, wide, altText, br, type, code } = button
+      const newButton = createButton(text, wide, altText, type, code)
       newButton.init()
-      this.addEvent(newButton)
+      this.addEventOnButtons(newButton)
+      addAlwaysShift(text.en, newButton)
       this.keys.push(newButton)
       line.append(newButton.node)
       if (br) {
         fragment.append(line)
         line = document.createElement('div')
+        line.classList.add('line')
       }
     }
     return fragment
   }
 
-  addEvent(button) {
+  addEventOnButtons(button) {
     switch (button.text.en) {
+      case 'Backspace':
+        button.node.addEventListener('click', this.backspaceHandler.bind(this))
+        break
+      case 'Tab':
+        button.node.addEventListener('click', this.tabHandler.bind(this))
+        break
+      case 'DEL':
+        button.node.addEventListener('click', this.delHandler.bind(this))
+        break
+      case 'Caps Lock':
+        button.node.addEventListener('click', this.capsHandler.bind(this))
+        break
+      case 'ENTER':
+        button.node.addEventListener('click', this.enterHandler.bind(this))
+        break
       case 'Shift':
-        button.node.addEventListener('mousedown', this.shiftHandlerDown.bind(this))
-        button.node.addEventListener('mouseup', this.shiftHandlerUp.bind(this))
+        button.node.addEventListener('click', this.shiftHandler.bind(this))
+        button.node.addEventListener('mousedown', this.shiftDownHandler.bind(this))
+        button.node.addEventListener('mouseup', this.shiftDownHandler.bind(this))
+        break
+      case '&#8593;':
+        button.node.addEventListener('click', this.arrowUpHandler.bind(this))
+        break
+      case 'Ctrl':
+        button.node.addEventListener('click', this.ctrlHandler.bind(this))
+        break
+      case 'Win':
+        button.node.addEventListener('click', this.winHandler.bind(this))
+        break
+      case 'Alt':
+        button.node.addEventListener('click', this.altHandler.bind(this))
+        break
+      case '&#8592;':
+        button.node.addEventListener('click', this.arrowLeftHandler.bind(this))
+        break
+      case '&#8595;':
+        button.node.addEventListener('click', this.arrowDownHandler.bind(this))
+        break
+      case '&#8594;':
+        button.node.addEventListener('click', this.arrowRightHandler.bind(this))
         break
       default:
         button.node.addEventListener('click', this.printText.bind(this))
     }
   }
 
-  shiftHandlerDown() {
-    for (const button of this.keys) {
-      button.node.innerHTML = button.text.en.toUpperCase()
+  backspaceHandler() {
+    const { value: val, selectionStart: start, selectionEnd: end } = this.textArea
+    if (start !== end) {
+      this.textArea.value = `${val.slice(0, start)}${val.slice(end)}`
+      this.setPositionCursor(start)
+    } else if (start !== 0) {
+      this.textArea.value = `${val.slice(0, start - 1)}${val.slice(start)}`
+      this.setPositionCursor(start - 1)
+    } else {
+      this.setPositionCursor(start)
     }
   }
 
-  shiftHandlerUp() {
-    for (const button of this.keys) {
-      button.node.innerHTML = button.text.en.toLowerCase()
+  tabHandler() {
+    const { value: val, selectionStart: start, selectionEnd: end } = this.textArea
+    this.textArea.value = `${val.substring(0, start)}\t${val.substring(end)}`
+    this.setPositionCursor(start + 1)
+  }
+
+  delHandler() {
+    const { value: val, selectionStart: start, selectionEnd: end } = this.textArea
+    if (start !== end) {
+      this.textArea.value = `${val.slice(0, start)}${val.slice(end)}`
+    } else if (end !== val.length) {
+      this.textArea.value = `${val.slice(0, start)}${val.slice(start + 1)}`
     }
+    this.setPositionCursor(start)
+  }
+
+  capsHandler(e) {
+    const { selectionStart: start } = this.textArea
+    this.capsLock = !this.capsLock
+    e.target.classList.toggle('active')
+    for (const button of this.keys) {
+      button.caps()
+    }
+    this.setPositionCursor(start)
+  }
+
+  enterHandler() {
+    const { value: val, selectionStart: start, selectionEnd: end } = this.textArea
+    this.textArea.value = `${val.substring(0, start)}\n${val.substring(end)}`
+    this.setPositionCursor(start + 1)
+  }
+
+  shiftHandler(e) {
+    const { selectionStart: start } = this.textArea
+    if (e.target.classList.contains('always-shift')) {
+      this.alwaysShift = !this.alwaysShift
+      this.setShiftedButtons()
+      const alwaysShift = document.querySelectorAll('.always-shift')
+      alwaysShift[0].classList.toggle('active')
+      alwaysShift[1].classList.toggle('active')
+    } else if (!e.isTrusted) {
+      e.target.classList.toggle('active')
+      this.setShiftedButtons()
+    }
+    this.setPositionCursor(start)
+  }
+
+  shiftDownHandler(e) {
+    const { selectionStart: start } = this.textArea
+    if (!e.target.classList.contains('always-shift')) {
+      e.target.classList.toggle('active')
+      this.setShiftedButtons()
+    }
+    this.setPositionCursor(start)
+  }
+
+  setShiftedButtons() {
+    this.shift = !this.shift
+    for (const button of this.keys) {
+      button.shift()
+    }
+  }
+
+  arrowUpHandler() {
+    this.setPositionCursor(0)
+  }
+
+  ctrlHandler() {
+    const { selectionStart: start } = this.textArea
+    this.setPositionCursor(start)
+  }
+
+  winHandler() {
+    const { selectionStart: start } = this.textArea
+    this.setPositionCursor(start)
+  }
+
+  altHandler() {
+    const { selectionStart: start } = this.textArea
+    this.setPositionCursor(start)
+  }
+
+  arrowLeftHandler() {
+    const { selectionStart: start } = this.textArea
+    this.setPositionCursor(start - 1)
+  }
+
+  arrowDownHandler() {
+    const { value: val } = this.textArea
+    this.setPositionCursor(val.length)
+  }
+
+  arrowRightHandler() {
+    const { selectionStart: start } = this.textArea
+    this.setPositionCursor(start + 1)
   }
 
   printText(e) {
-    this.textArea.value += this.capsLock
-      ? e.target.textContent.toUpperCase()
-      : e.target.textContent.toLowerCase()
+    const word = e.target.textContent
+    const { value: val, selectionStart: start, selectionEnd: end } = this.textArea
+    if (this.capsLock && this.shift) {
+      this.textArea.value = `${val.substring(0, start)}${word.toLowerCase()}${val.substring(end)}`
+    } else if (this.capsLock || this.shift) {
+      this.textArea.value = `${val.substring(0, start)}${word.toUpperCase()}${val.substring(end)}`
+    } else {
+      this.textArea.value = `${val.substring(0, start)}${word.toLowerCase()}${val.substring(end)}`
+    }
+    this.setPositionCursor(start + 1)
   }
+
+  changeLang() {
+    this.lang = this.lang === 'en' ? 'ru' : 'en'
+    for (const button of this.keys) {
+      button.changeLanguage(this.lang)
+      if (button.text.en === 'Shift') {
+        const alwaysShift = document.createElement('button')
+        alwaysShift.classList.add('always-shift')
+        if (this.alwaysShift) alwaysShift.classList.add('active')
+        button.node.append(alwaysShift)
+      }
+
+      // if (button.code === 'ShiftLeft') {
+      //   if (event.code === 'ControlLeft' || event.code === 'ShiftLeft') {
+      //     button.node.classList.toggle('active')
+      //   }
+      // }
+
+      // if (button.code === 'ShiftRight' && event.code === 'ControlRight') {
+      //   console.log('right')
+      //   button.node.classList.toggle('active')
+      // }
+    }
+  }
+
+  setPositionCursor(position) {
+    this.textArea.focus()
+    this.textArea.selectionStart = position
+    this.textArea.selectionEnd = position
+  }
+
+  highlightButton(e) {
+    e.preventDefault()
+
+    const button = this.keys.find(i => i.code === e.code)
+    if (this.alwaysShift && isShift(button.code)) return null
+    if (this.shift && isShift(button.code)) return null
+    if (button) {
+      if (!isCaps(button.code) && !isShift(button.code)) {
+        button.node.classList.add('active')
+      }
+      button.node.click()
+    }
+    return null
+  }
+
+  removeHighlightButton(e) {
+    e.preventDefault()
+
+    const button = this.keys.find(i => i.code === e.code)
+    if (this.alwaysShift && isShift(button.code)) return null
+    if (!this.shift && isShift(button.code)) return null
+    if (button && !isCaps(button.code) && !isShift(button.code)) {
+      button.node.classList.remove('active')
+    }
+
+    if (isShift(button.code)) {
+      button.node.click()
+    }
+    return null
+  }
+}
+
+function createButton(text, wide, altText, type, code) {
+  let button
+  switch (type) {
+    case 'alternative':
+      button = new ButtonAlternative(text, wide, altText, code)
+      break
+    case 'functional':
+      button = new Button(text, wide, altText, code)
+      break
+    default:
+      button = new ButtonWord(text, wide, altText, code)
+      break
+  }
+  return button
 }
 
 window.onload = () => {
