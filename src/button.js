@@ -2,13 +2,14 @@ class Button {
   constructor(
     text = { en: 'a', ru: 'а' },
     wide = 'normal',
+    lang = 'en',
     altText = { en: 'A', ru: 'А' },
     code = 'KeyA',
   ) {
     this.node = null
-    this.wide = wide
-    this.lang = 'en'
     this.text = text
+    this.wide = wide
+    this.lang = lang
     this.altText = altText
     this.code = code
   }

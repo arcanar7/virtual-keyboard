@@ -10,7 +10,7 @@ class Keyboard {
     this.shift = false
     this.alwaysShift = false
     this.keys = []
-    this.lang = 'en'
+    this.lang = localStorage.getItem('lang') || 'en'
     this.textArea = document.createElement('textarea')
   }
 
@@ -43,7 +43,7 @@ class Keyboard {
     line.classList.add('line')
     for (const button of arrayButtons) {
       const { text, wide, altText, br, type, code } = button
-      const newButton = createButton(text, wide, altText, type, code)
+      const newButton = createButton(text, wide, this.lang, altText, type, code)
       newButton.init()
       this.addEventOnButtons(newButton)
       addAlwaysShift(text.en, newButton)
@@ -77,8 +77,8 @@ class Keyboard {
         break
       case 'Shift':
         button.node.addEventListener('click', this.shiftHandler.bind(this))
-        button.node.addEventListener('mousedown', this.shiftDownHandler.bind(this))
-        button.node.addEventListener('mouseup', this.shiftDownHandler.bind(this))
+        button.node.addEventListener('mousedown', this.shiftMouseHandler.bind(this))
+        button.node.addEventListener('mouseup', this.shiftMouseHandler.bind(this))
         break
       case '&#8593;':
         button.node.addEventListener('click', this.arrowUpHandler.bind(this))
@@ -166,7 +166,7 @@ class Keyboard {
     this.setPositionCursor(start)
   }
 
-  shiftDownHandler(e) {
+  shiftMouseHandler(e) {
     const { selectionStart: start } = this.textArea
     if (!e.target.classList.contains('always-shift')) {
       e.target.classList.toggle('active')
@@ -188,6 +188,7 @@ class Keyboard {
 
   ctrlHandler() {
     const { selectionStart: start } = this.textArea
+    if (this.shift) this.changeLang()
     this.setPositionCursor(start)
   }
 
@@ -231,6 +232,7 @@ class Keyboard {
 
   changeLang() {
     this.lang = this.lang === 'en' ? 'ru' : 'en'
+    localStorage.setItem('lang', this.lang)
     for (const button of this.keys) {
       button.changeLanguage(this.lang)
       if (button.text.en === 'Shift') {
@@ -239,17 +241,6 @@ class Keyboard {
         if (this.alwaysShift) alwaysShift.classList.add('active')
         button.node.append(alwaysShift)
       }
-
-      // if (button.code === 'ShiftLeft') {
-      //   if (event.code === 'ControlLeft' || event.code === 'ShiftLeft') {
-      //     button.node.classList.toggle('active')
-      //   }
-      // }
-
-      // if (button.code === 'ShiftRight' && event.code === 'ControlRight') {
-      //   console.log('right')
-      //   button.node.classList.toggle('active')
-      // }
     }
   }
 
@@ -291,17 +282,17 @@ class Keyboard {
   }
 }
 
-function createButton(text, wide, altText, type, code) {
+function createButton(text, wide, lang, altText, type, code) {
   let button
   switch (type) {
     case 'alternative':
-      button = new ButtonAlternative(text, wide, altText, code)
+      button = new ButtonAlternative(text, wide, lang, altText, code)
       break
     case 'functional':
-      button = new Button(text, wide, altText, code)
+      button = new Button(text, wide, lang, altText, code)
       break
     default:
-      button = new ButtonWord(text, wide, altText, code)
+      button = new ButtonWord(text, wide, lang, altText, code)
       break
   }
   return button

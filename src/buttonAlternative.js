@@ -4,10 +4,11 @@ class ButtonAlternative extends Button {
   constructor(
     text = { en: 'a', ru: 'а' },
     wide = 'normal',
+    lang = 'en',
     altText = { en: 'A', ru: 'А' },
     code = 'KeyA',
   ) {
-    super(text, wide, altText, code)
+    super(text, wide, lang, altText, code)
     this.shifted = false
   }
 
