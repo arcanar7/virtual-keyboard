@@ -2,7 +2,7 @@ import Button from './src/button.js'
 import ButtonWord from './src/buttonWord.js'
 import ButtonAlternative from './src/buttonAlternative.js'
 import arrayButtons from './src/arrayButtons.js'
-import { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow } from './src/utils.js'
+import { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl } from './src/utils.js'
 
 class Keyboard {
   constructor() {
@@ -277,8 +277,13 @@ class Keyboard {
       } else {
         e.preventDefault()
 
-        if (this.alwaysShift && isShift(button.code)) return null
-        if (this.shift && isShift(button.code)) return null
+        if (isCaps(button.code) && e.repeat) return null
+        if (isShift(button.code) && e.repeat) return null
+        if (isCtrl(button.code) && e.repeat) {
+          const alt = this.keys.find(i => i.code === 'AltRight')
+          if (alt.node.classList.contains('active')) button.node.classList.remove('active')
+          return null
+        }
         if (!isCaps(button.code) && !isShift(button.code)) {
           button.node.classList.add('active')
         }
@@ -297,8 +302,6 @@ class Keyboard {
       } else {
         e.preventDefault()
 
-        if (this.alwaysShift && isShift(button.code)) return null
-        if (!this.shift && isShift(button.code)) return null
         if (!isCaps(button.code) && !isShift(button.code)) {
           button.node.classList.remove('active')
         }

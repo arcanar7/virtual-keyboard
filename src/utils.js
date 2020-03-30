@@ -14,6 +14,10 @@ function isShift(code) {
   return ['Shift', 'ShiftLeft', 'ShiftRight'].includes(code)
 }
 
+function isCtrl(code) {
+  return ['ControlLeft', 'ControlRight'].includes(code)
+}
+
 function isArrow(code) {
   return ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'].includes(code)
 }
@@ -37,4 +41,4 @@ function runOnKeys(func, ...combinations) {
   })
 }
 
-export { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow }
+export { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl }
