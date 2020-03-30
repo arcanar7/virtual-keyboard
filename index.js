@@ -10,6 +10,7 @@ class Keyboard {
     this.shift = false
     this.alwaysShift = false
     this.mouseShift = false
+    this.nodeShift = null
     this.keys = []
     this.lang = localStorage.getItem('lang') || 'en'
     this.textArea = document.createElement('textarea')
@@ -174,23 +175,22 @@ class Keyboard {
   shiftMouseDownHandler(e) {
     if (!this.mouseShift) {
       this.mouseShift = true
-      this.shiftMouseHandler(e)
+      this.nodeShift = e.target
+      this.shiftMouseHandler()
     }
   }
 
-  shiftMouseUpHandler(e) {
+  shiftMouseUpHandler() {
     if (this.mouseShift) {
       this.mouseShift = false
-      this.shiftMouseHandler(e)
+      this.shiftMouseHandler()
     }
   }
 
-  shiftMouseHandler(e) {
+  shiftMouseHandler() {
     const { selectionStart: start } = this.textArea
-    if (!e.target.classList.contains('always-shift')) {
-      e.target.classList.toggle('active')
-      this.setShiftedButtons()
-    }
+    this.nodeShift.classList.toggle('active')
+    this.setShiftedButtons()
     this.setPositionCursor(start)
   }
 
@@ -279,11 +279,7 @@ class Keyboard {
 
         if (isCaps(button.code) && e.repeat) return null
         if (isShift(button.code) && e.repeat) return null
-        if (isCtrl(button.code) && e.repeat) {
-          const alt = this.keys.find(i => i.code === 'AltRight')
-          if (alt.node.classList.contains('active')) button.node.classList.remove('active')
-          return null
-        }
+        if (isCtrl(button.code) && e.repeat) return null
         if (!isCaps(button.code) && !isShift(button.code)) {
           button.node.classList.add('active')
         }
