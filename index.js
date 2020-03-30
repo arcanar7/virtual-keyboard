@@ -9,6 +9,7 @@ class Keyboard {
     this.capsLock = false
     this.shift = false
     this.alwaysShift = false
+    this.mouseShift = false
     this.keys = []
     this.lang = localStorage.getItem('lang') || 'en'
     this.textArea = document.createElement('textarea')
@@ -35,6 +36,7 @@ class Keyboard {
     )
     document.addEventListener('keydown', this.highlightButton.bind(this))
     document.addEventListener('keyup', this.removeHighlightButton.bind(this))
+    document.addEventListener('mouseup', this.fixSticking.bind(this))
   }
 
   createKeys() {
@@ -77,8 +79,8 @@ class Keyboard {
         break
       case 'Shift':
         button.node.addEventListener('click', this.shiftHandler.bind(this))
-        button.node.addEventListener('mousedown', this.shiftMouseHandler.bind(this))
-        button.node.addEventListener('mouseup', this.shiftMouseHandler.bind(this))
+        button.node.addEventListener('mousedown', this.shiftMouseDownHandler.bind(this))
+        button.node.addEventListener('mouseup', this.shiftMouseUpHandler.bind(this))
         break
       case '&#8593;':
         button.node.addEventListener('click', this.arrowUpHandler.bind(this))
@@ -153,7 +155,7 @@ class Keyboard {
 
   shiftHandler(e) {
     const { selectionStart: start } = this.textArea
-    if (e.target.classList.contains('always-shift')) {
+    if (e.target.classList.contains('always-shift') && (!this.shift || this.alwaysShift)) {
       this.alwaysShift = !this.alwaysShift
       this.setShiftedButtons()
       const alwaysShift = document.querySelectorAll('.always-shift')
@@ -164,6 +166,20 @@ class Keyboard {
       this.setShiftedButtons()
     }
     this.setPositionCursor(start)
+  }
+
+  shiftMouseDownHandler(e) {
+    if (!this.mouseShift) {
+      this.mouseShift = true
+      this.shiftMouseHandler(e)
+    }
+  }
+
+  shiftMouseUpHandler(e) {
+    if (this.mouseShift) {
+      this.mouseShift = false
+      this.shiftMouseHandler(e)
+    }
   }
 
   shiftMouseHandler(e) {
@@ -188,7 +204,7 @@ class Keyboard {
 
   ctrlHandler() {
     const { selectionStart: start } = this.textArea
-    if (this.shift) this.changeLang()
+    if (this.shift || this.alwaysShift) this.changeLang()
     this.setPositionCursor(start)
   }
 
@@ -290,6 +306,15 @@ class Keyboard {
       }
     }
     return null
+  }
+
+  fixSticking(e) {
+    if (!isShift(e.target.textContent) && this.mouseShift) {
+      this.mouseShift = false
+      this.setShiftedButtons()
+      const el = this.keys.find(i => i.node.classList.contains('active') && isShift(i.code))
+      el.node.classList.remove('active')
+    }
   }
 }
 

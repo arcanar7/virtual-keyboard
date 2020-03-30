@@ -11,7 +11,7 @@ function isCaps(code) {
 }
 
 function isShift(code) {
-  return code === 'ShiftLeft' || code === 'ShiftRight'
+  return ['Shift', 'ShiftLeft', 'ShiftRight'].includes(code)
 }
 
 function isArrow(code) {
