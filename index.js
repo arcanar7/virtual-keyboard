@@ -2,7 +2,7 @@ import Button from './src/button.js'
 import ButtonWord from './src/buttonWord.js'
 import ButtonAlternative from './src/buttonAlternative.js'
 import arrayButtons from './src/arrayButtons.js'
-import { addAlwaysShift, isCaps, isShift, runOnKeys } from './src/utils.js'
+import { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow } from './src/utils.js'
 
 class Keyboard {
   constructor() {
@@ -251,32 +251,43 @@ class Keyboard {
   }
 
   highlightButton(e) {
-    e.preventDefault()
-
     const button = this.keys.find(i => i.code === e.code)
-    if (this.alwaysShift && isShift(button.code)) return null
-    if (this.shift && isShift(button.code)) return null
     if (button) {
-      if (!isCaps(button.code) && !isShift(button.code)) {
+      if (isArrow(button.code)) {
         button.node.classList.add('active')
+      } else {
+        e.preventDefault()
+
+        if (this.alwaysShift && isShift(button.code)) return null
+        if (this.shift && isShift(button.code)) return null
+        if (!isCaps(button.code) && !isShift(button.code)) {
+          button.node.classList.add('active')
+        }
+
+        button.node.click()
       }
-      button.node.click()
     }
     return null
   }
 
   removeHighlightButton(e) {
-    e.preventDefault()
-
     const button = this.keys.find(i => i.code === e.code)
-    if (this.alwaysShift && isShift(button.code)) return null
-    if (!this.shift && isShift(button.code)) return null
-    if (button && !isCaps(button.code) && !isShift(button.code)) {
-      button.node.classList.remove('active')
-    }
+    if (button) {
+      if (isArrow(button.code)) {
+        button.node.classList.remove('active')
+      } else {
+        e.preventDefault()
 
-    if (isShift(button.code)) {
-      button.node.click()
+        if (this.alwaysShift && isShift(button.code)) return null
+        if (!this.shift && isShift(button.code)) return null
+        if (!isCaps(button.code) && !isShift(button.code)) {
+          button.node.classList.remove('active')
+        }
+
+        if (isShift(button.code)) {
+          button.node.click()
+        }
+      }
     }
     return null
   }

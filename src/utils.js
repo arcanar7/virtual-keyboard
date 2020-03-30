@@ -14,6 +14,10 @@ function isShift(code) {
   return code === 'ShiftLeft' || code === 'ShiftRight'
 }
 
+function isArrow(code) {
+  return ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'].includes(code)
+}
+
 function runOnKeys(func, ...combinations) {
   const pressed = new Set()
 
@@ -33,4 +37,4 @@ function runOnKeys(func, ...combinations) {
   })
 }
 
-export { addAlwaysShift, isCaps, isShift, runOnKeys }
+export { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow }
