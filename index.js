@@ -1,8 +1,9 @@
-import Button from './src/button.js'
-import ButtonWord from './src/buttonWord.js'
-import ButtonAlternative from './src/buttonAlternative.js'
-import arrayButtons from './src/arrayButtons.js'
-import { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl } from './src/utils.js'
+import Button from './src/components/button.js'
+import ButtonWord from './src/components/buttonWord.js'
+import ButtonAlternative from './src/components/buttonAlternative.js'
+
+import arrayButtons from './src/helpers/arrayButtons.js'
+import { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl } from './src/helpers/utils.js'
 
 class Keyboard {
   constructor() {
