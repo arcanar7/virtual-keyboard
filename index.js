@@ -22,16 +22,18 @@ class Keyboard {
     const keyboard = document.createElement('div')
     const keyboardKeys = document.createElement('div')
     const info = document.createElement('p')
+    const infoSystem = document.createElement('p')
 
     wrapper.classList.add('wrapper')
     this.textArea.classList.add('text')
     keyboard.classList.add('keyboard')
     keyboardKeys.classList.add('keyboard__keys')
     info.textContent = `Смена языка ввода - 'Ctrl' + 'Shift'`
+    infoSystem.textContent = 'Сделано в ОС Windows'
 
     keyboardKeys.append(this.createKeys())
     keyboard.append(keyboardKeys)
-    wrapper.append(this.textArea, keyboard, info)
+    wrapper.append(this.textArea, keyboard, info, infoSystem)
     document.body.append(wrapper)
 
     runOnKeys(
