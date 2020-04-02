@@ -19,17 +19,22 @@ class Keyboard {
 
   init() {
     const wrapper = document.createElement('div')
-    const keyboard = document.createElement('div')
-    const keyboardKeys = document.createElement('div')
-    const info = document.createElement('p')
-    const infoSystem = document.createElement('p')
-
     wrapper.classList.add('wrapper')
-    this.textArea.classList.add('text')
+
+    const keyboard = document.createElement('div')
     keyboard.classList.add('keyboard')
+
+    const keyboardKeys = document.createElement('div')
     keyboardKeys.classList.add('keyboard__keys')
+    keyboardKeys.addEventListener('click', this.clickButton.bind(this))
+
+    const info = document.createElement('p')
     info.textContent = `Смена языка ввода - 'Ctrl' + 'Shift'`
+
+    const infoSystem = document.createElement('p')
     infoSystem.textContent = 'Сделано в ОС Windows'
+
+    this.textArea.classList.add('text')
 
     keyboardKeys.append(this.createKeys())
     keyboard.append(keyboardKeys)
@@ -54,7 +59,10 @@ class Keyboard {
       const { text, wide, altText, br, type, code } = button
       const newButton = createButton(text, wide, this.lang, altText, type, code)
       newButton.init()
-      this.addEventOnButtons(newButton)
+      if (text.en === 'Shift') {
+        newButton.node.addEventListener('mousedown', this.shiftMouseDownHandler.bind(this))
+        newButton.node.addEventListener('mouseup', this.shiftMouseUpHandler.bind(this))
+      }
       addAlwaysShift(text.en, newButton)
       this.keys.push(newButton)
       line.append(newButton.node)
@@ -67,51 +75,51 @@ class Keyboard {
     return fragment
   }
 
-  addEventOnButtons(button) {
-    switch (button.text.en) {
-      case 'Backspace':
-        button.node.addEventListener('click', this.backspaceHandler.bind(this))
-        break
-      case 'Tab':
-        button.node.addEventListener('click', this.tabHandler.bind(this))
-        break
-      case 'DEL':
-        button.node.addEventListener('click', this.delHandler.bind(this))
-        break
-      case 'Caps Lock':
-        button.node.addEventListener('click', this.capsHandler.bind(this))
-        break
-      case 'ENTER':
-        button.node.addEventListener('click', this.enterHandler.bind(this))
-        break
-      case 'Shift':
-        button.node.addEventListener('click', this.shiftHandler.bind(this))
-        button.node.addEventListener('mousedown', this.shiftMouseDownHandler.bind(this))
-        button.node.addEventListener('mouseup', this.shiftMouseUpHandler.bind(this))
-        break
-      case '&#8593;':
-        button.node.addEventListener('click', this.arrowUpHandler.bind(this))
-        break
-      case 'Ctrl':
-        button.node.addEventListener('click', this.ctrlHandler.bind(this))
-        break
-      case 'Win':
-        button.node.addEventListener('click', this.winHandler.bind(this))
-        break
-      case 'Alt':
-        button.node.addEventListener('click', this.altHandler.bind(this))
-        break
-      case '&#8592;':
-        button.node.addEventListener('click', this.arrowLeftHandler.bind(this))
-        break
-      case '&#8595;':
-        button.node.addEventListener('click', this.arrowDownHandler.bind(this))
-        break
-      case '&#8594;':
-        button.node.addEventListener('click', this.arrowRightHandler.bind(this))
-        break
-      default:
-        button.node.addEventListener('click', this.printText.bind(this))
+  clickButton(event) {
+    if (event.target.dataset.button) {
+      switch (event.target.dataset.button) {
+        case 'Backspace':
+          this.backspaceHandler()
+          break
+        case 'Tab':
+          this.tabHandler()
+          break
+        case 'DEL':
+          this.delHandler()
+          break
+        case 'Caps Lock':
+          this.capsHandler(event)
+          break
+        case 'ENTER':
+          this.enterHandler()
+          break
+        case 'Shift':
+          this.shiftHandler(event)
+          break
+        case '&#8593;':
+          this.arrowUpHandler()
+          break
+        case 'Ctrl':
+          this.ctrlHandler()
+          break
+        case 'Win':
+          this.winHandler()
+          break
+        case 'Alt':
+          this.altHandler()
+          break
+        case '&#8592;':
+          this.arrowLeftHandler()
+          break
+        case '&#8595;':
+          this.arrowDownHandler()
+          break
+        case '&#8594;':
+          this.arrowRightHandler()
+          break
+        default:
+          this.printText(event)
+      }
     }
   }
 
@@ -176,15 +184,15 @@ class Keyboard {
   }
 
   shiftMouseDownHandler(e) {
-    if (!this.mouseShift) {
+    if (!this.mouseShift && isShift(e.target.textContent)) {
       this.mouseShift = true
       this.nodeShift = e.target
       this.shiftMouseHandler()
     }
   }
 
-  shiftMouseUpHandler() {
-    if (this.mouseShift) {
+  shiftMouseUpHandler(e) {
+    if (this.mouseShift && isShift(e.target.textContent)) {
       this.mouseShift = false
       this.shiftMouseHandler()
     }
@@ -257,12 +265,7 @@ class Keyboard {
     localStorage.setItem('lang', this.lang)
     for (const button of this.keys) {
       button.changeLanguage(this.lang)
-      if (button.text.en === 'Shift') {
-        const alwaysShift = document.createElement('button')
-        alwaysShift.classList.add('always-shift')
-        if (this.alwaysShift) alwaysShift.classList.add('active')
-        button.node.append(alwaysShift)
-      }
+      addAlwaysShift(button.text.en, button, this.alwaysShift)
     }
   }
 

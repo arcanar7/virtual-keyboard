@@ -17,6 +17,7 @@ class Button {
   init() {
     this.node = document.createElement('button')
     this.node.classList.add('keyboard__key')
+    this.node.dataset.button = this.text.en
     switch (this.wide) {
       case 'wide':
         this.node.classList.add('keyboard__key_wide')

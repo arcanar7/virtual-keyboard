@@ -1,7 +1,9 @@
-function addAlwaysShift(text, button) {
+function addAlwaysShift(text, button, isAlwaysShift = false) {
   if (text === 'Shift') {
     const alwaysShift = document.createElement('button')
     alwaysShift.classList.add('always-shift')
+    alwaysShift.dataset.button = text
+    if (isAlwaysShift) alwaysShift.classList.add('active')
     button.node.append(alwaysShift)
   }
 }
