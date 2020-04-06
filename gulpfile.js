@@ -1,8 +1,8 @@
-const gulp = require('gulp')
-const sass = require('gulp-sass')
-const browserSync = require('browser-sync').create()
-const gulpStylelint = require('gulp-stylelint')
-const concat = require('gulp-concat')
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const browserSync = require('browser-sync').create();
+const gulpStylelint = require('gulp-stylelint');
+const concat = require('gulp-concat');
 
 function style() {
   return gulp
@@ -11,7 +11,7 @@ function style() {
     .pipe(sass())
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./'))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream());
 }
 
 function watch() {
@@ -19,11 +19,11 @@ function watch() {
     server: {
       baseDir: './',
     },
-  })
-  style()
-  gulp.watch('./scss/**/*.scss', style)
-  gulp.watch(['./*.html', './index.js']).on('change', browserSync.reload)
+  });
+  style();
+  gulp.watch('./scss/**/*.scss', style);
+  gulp.watch(['./*.html', './index.js']).on('change', browserSync.reload);
 }
 
-exports.style = style
-exports.watch = watch
+exports.style = style;
+exports.watch = watch;

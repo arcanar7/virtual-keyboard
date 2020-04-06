@@ -511,6 +511,6 @@ const arrayButtons = [
     type: 'functional',
     code: 'ControlRight',
   },
-]
+];
 
-export default arrayButtons
+export default arrayButtons;

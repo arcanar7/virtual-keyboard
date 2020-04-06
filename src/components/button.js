@@ -6,51 +6,51 @@ class Button {
     altText = { en: 'A', ru: 'А' },
     code = 'KeyA',
   ) {
-    this.node = null
-    this.text = text
-    this.wide = wide
-    this.lang = lang
-    this.altText = altText
-    this.code = code
+    this.node = null;
+    this.text = text;
+    this.wide = wide;
+    this.lang = lang;
+    this.altText = altText;
+    this.code = code;
   }
 
   init() {
-    this.node = document.createElement('button')
-    this.node.classList.add('keyboard__key')
-    this.node.dataset.button = this.text.en
+    this.node = document.createElement('button');
+    this.node.classList.add('keyboard__key');
+    this.node.dataset.button = this.text.en;
     switch (this.wide) {
       case 'wide':
-        this.node.classList.add('keyboard__key_wide')
-        break
+        this.node.classList.add('keyboard__key_wide');
+        break;
       case 'middle-wide':
-        this.node.classList.add('keyboard__key_middle-wide')
-        break
+        this.node.classList.add('keyboard__key_middle-wide');
+        break;
       case 'ultra-wide':
-        this.node.classList.add('keyboard__key_ultra-wide')
-        break
+        this.node.classList.add('keyboard__key_ultra-wide');
+        break;
       default:
-        break
+        break;
     }
 
-    this.changeText()
+    this.changeText();
   }
 
   changeText() {
-    this.node.innerHTML = this.text[this.lang]
+    this.node.innerHTML = this.text[this.lang];
   }
 
   changeLanguage(lang) {
-    this.lang = lang
-    this.changeText()
+    this.lang = lang;
+    this.changeText();
   }
 
   shift() {
-    this.node.classList.remove('shift')
+    this.node.classList.remove('shift');
   }
 
   caps() {
-    this.node.classList.remove('shift')
+    this.node.classList.remove('shift');
   }
 }
 
-export default Button
+export default Button;
