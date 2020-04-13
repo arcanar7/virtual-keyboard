@@ -2,6 +2,7 @@ export const backspaceKey = 'Backspace';
 export const tabKey = 'Tab';
 export const delKey = 'DEL';
 export const capsKey = 'Caps Lock';
+export const capsKeyCode = 'CapsLock';
 export const enterKey = 'ENTER';
 export const shiftKey = 'Shift';
 export const arrowUpKey = '&#8593;';

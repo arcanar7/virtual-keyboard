@@ -13,7 +13,7 @@ function addAlwaysShift(text, button, isAlwaysShift = false) {
 }
 
 function isCaps(code) {
-  return code === keys.capsKey;
+  return [keys.capsKey, keys.capsKeyCode].includes(code);
 }
 
 function isShift(code) {
@@ -26,6 +26,10 @@ function isCtrl(code) {
 
 function isArrow(code) {
   return [keys.arrowUp, keys.arrowLeft, keys.arrowDown, keys.arrowRight].includes(code);
+}
+
+function isRepeat(code, e) {
+  return (isShift(code) || isCaps(code) || isCtrl(code)) && e.repeat;
 }
 
 function runOnKeys(func, ...combinations) {
@@ -47,4 +51,4 @@ function runOnKeys(func, ...combinations) {
   });
 }
 
-export { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl };
+export { addAlwaysShift, isCaps, isShift, runOnKeys, isArrow, isCtrl, isRepeat };

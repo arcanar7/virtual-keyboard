@@ -286,13 +286,7 @@ class Keyboard {
       } else {
         e.preventDefault();
 
-        if (utils.isCaps(button.code) && e.repeat) {
-          return null;
-        }
-        if (utils.isShift(button.code) && e.repeat) {
-          return null;
-        }
-        if (utils.isCtrl(button.code) && e.repeat) {
+        if (utils.isRepeat(button.code, e)) {
           return null;
         }
         if (!utils.isCaps(button.code) && !utils.isShift(button.code)) {
@@ -332,7 +326,9 @@ class Keyboard {
       const el = this.keys.find(
         (i) => i.node.classList.contains('active') && utils.isShift(i.code),
       );
-      el.node.classList.remove('active');
+      if (el) {
+        el.node.classList.remove('active');
+      }
     }
   }
 }
